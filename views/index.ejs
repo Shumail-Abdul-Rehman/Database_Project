@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management</title>
+  <style>
+    /* General styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #555;
+      padding: 10px;
+      text-align: center;
+    }
+
+    a {
+      text-decoration: none;
+      color: #007bff;
+      padding: 10px;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Styling the table */
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Add book link */
+    .add-book-link {
+      display: block;
+      text-align: center;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      margin: 20px;
+    }
+
+    .add-book-link:hover {
+      background-color: #218838;
+    }
+
+    /* Delete button */
+    .delete-btn {
+      padding: 5px 10px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .delete-btn:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+<body>
+  <a href="/add-book" class="add-book-link">Add New Book</a>
+  <h1>Library Management System</h1>
+
+  <h2>Available Books</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Available</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% books.forEach(book => { %>
+        <tr>
+          <td><%= book.title %></td>
+          <td><%= book.author %></td>
+          <td><%= book.available ? 'Yes' : 'No' %></td>
+          <td>
+            <% if (book.available) { %>
+              <a href="/loan/<%= book.book_id %>">Loan</a>
+            <% } else { %>
+              <a href="/return/<%= book.book_id %>">Return</a>
+            <% } %>
+
+            <!-- Delete Button -->
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</body>
+</html>
